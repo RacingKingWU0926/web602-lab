@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
   res.render('form', { title: 'Registration form' });
 });
 
+// submit form
 router.post(
   '/', 
   [
@@ -41,5 +42,16 @@ router.post(
     }
   }
 );
+
+// listing records
+router.get('/registrations', (req, res) => {
+  Registration.find()
+    .then((registrations) => {
+      res.render('index', { title: 'Listing registrations', registrations});
+    })
+    .catch(() => {
+      res.send('Sorry! Something went wrong!');
+    });
+})
 
 module.exports = router;
